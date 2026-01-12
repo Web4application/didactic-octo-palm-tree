@@ -1,0 +1,22 @@
+cmake_minimum_required(VERSION 3.15)
+project(elf_project LANGUAGES CXX)
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+# Add ELFIO (vendor it under third_party/ELFIO or use find_package if installed)
+add_subdirectory(third_party/ELFIO)  # or replace with your path/setup
+
+include_directories(
+    ${CMAKE_SOURCE_DIR}/include
+    third_party/ELFIO
+)
+
+add_executable(elf_demo
+    src/main.cpp
+    src/ElfWrapper.cpp
+)
+
+target_link_libraries(elf_demo
+    ELFIO
+)
